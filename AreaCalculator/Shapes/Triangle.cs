@@ -1,4 +1,4 @@
-﻿namespace AreaCalculator.Shapes
+﻿namespace AreaCalculatorProject.Shapes
 {
     public class Triangle : Shape
     {
@@ -38,7 +38,7 @@
             return ((sides[0] + sides[1]) > sides[2]) && ((sides[0] + sides[2]) > sides[1]) && ((sides[1] + sides[2]) > sides[0]);
         }
 
-        public bool IsRectangular()
+        private bool IsRectangular()
         {
             return Math.Pow(sides[2], 2) == Math.Pow(sides[0], 2) + Math.Pow(sides[1], 2);
         }

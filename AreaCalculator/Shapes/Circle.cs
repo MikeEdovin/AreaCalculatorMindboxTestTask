@@ -1,4 +1,4 @@
-﻿namespace AreaCalculator.Shapes
+﻿namespace AreaCalculatorProject.Shapes
 {
     public class Circle:Shape
     {

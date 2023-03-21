@@ -1,8 +1,8 @@
-﻿using AreaCalculator.Shapes;
+﻿using AreaCalculatorProject.Shapes;
 
-namespace AreaCalculator
+namespace AreaCalculatorProject
 {
-    public class AreaCalculator : ICalculator
+    public class AreaCalculator : IAreaCalculator
     {
         public double Calculate(Shape shape)
         {
