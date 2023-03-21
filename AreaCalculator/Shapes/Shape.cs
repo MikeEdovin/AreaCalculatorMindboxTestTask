@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace AreaCalculator.Shapes
+﻿namespace AreaCalculator.Shapes
 {
-    internal class Shape
+    public abstract class Shape
     {
+        public abstract double CalculateArea();
     }
 }

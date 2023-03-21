@@ -1,17 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.Immutable;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace AreaCalculator.Shapes
+﻿namespace AreaCalculator.Shapes
 {
     public class Triangle : Shape
     {
         private readonly List<double> sides;
-        private readonly double side2;
-        private readonly double side3;
 
         public Triangle(double side1, double side2, double side3)
         {
@@ -25,12 +16,14 @@ namespace AreaCalculator.Shapes
             {
                 if (IsRectangular())
                 {
-                    return (sides[0] * sides[1]) / 2;
+                    return Math.Round((sides[0] * sides[1]) / 2,2);
                 }
                 else
                 {
                     double halfPerimeter = sides.Sum() / 2;
-                    return Math.Sqrt(halfPerimeter * (halfPerimeter - sides[0]) * (halfPerimeter - sides[1]) * (halfPerimeter - sides[2]));
+                    return Math.Round(
+                        Math.Sqrt(halfPerimeter * (halfPerimeter - sides[0]) 
+                        * (halfPerimeter - sides[1]) * (halfPerimeter - sides[2])),2);
                 }
             }
             else
