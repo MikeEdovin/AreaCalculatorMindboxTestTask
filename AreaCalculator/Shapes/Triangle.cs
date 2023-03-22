@@ -1,19 +1,23 @@
 ﻿namespace AreaCalculatorProject.Shapes
 {
-    public class Triangle : Shape
+    internal class Triangle : Shape
     {
         private readonly List<double> sides;
 
         public Triangle(double side1, double side2, double side3)
-        {
-            sides= new List<double>() { side1,side2,side3};
-            sides.Sort();
+        {if (ValidateTriangle(side1, side2, side3))
+            {
+                sides = new List<double>() { side1, side2, side3 };
+                sides.Sort();
+            }
+            else
+            {
+                throw new ArgumentException("Invalid input. There is no triangle with such a set of side sizes ");
+            }
         }
 
         public override double CalculateArea()
         {
-            if (IsExist())
-            {
                 if (IsRectangular())
                 {
                     return Math.Round((sides[0] * sides[1]) / 2,2);
@@ -26,21 +30,22 @@
                         * (halfPerimeter - sides[1]) * (halfPerimeter - sides[2])),2);
                 }
             }
-            else
-            {
-                throw new ArgumentException("Invalid input. There is no triangle with such a set of side sizes ");
-            }
-        }
+        
     
 
-        private bool IsExist()
+        internal static bool ValidateTriangle(double side1, double side2, double side3)
         {
-            return ((sides[0] + sides[1]) > sides[2]) && ((sides[0] + sides[2]) > sides[1]) && ((sides[1] + sides[2]) > sides[0]);
+            return side1+side2 > side3 && side1+side3 > side2 && side2+side3 > side1;
         }
 
-        private bool IsRectangular()
+        internal bool IsRectangular()
         {
-            return Math.Pow(sides[2], 2) == Math.Pow(sides[0], 2) + Math.Pow(sides[1], 2);
+            return Math.Round(sides[2] * sides[2], 1) == Math.Round(sides[0] * sides[0] + sides[1] * sides[1],1) ;
+        }
+
+        internal List<double> ShowArray()
+        {
+            return sides;
         }
     }
 }

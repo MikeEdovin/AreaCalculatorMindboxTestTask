@@ -5,29 +5,23 @@ namespace AreaCalculatorTests
 {
     public class AreaCalculatorTests
     {
-        [Fact]
-        public void CalculateShouldReturnExpectedValue()
+        [Theory]
+        [InlineData(2.2, 2.2, 2,1.96)]
+        [InlineData(10, 5, 11.18,25)]
+        public void TriangleCalculateAreaShouldReturnExpectedValue(double side1, double side2, double side3, double expected)
         {
             IAreaCalculator calculator= new AreaCalculator();
-
-            //Act
-            double area = calculator.Calculate(new Triangle(2.2, 2.2, 2));
-            double area2 = calculator.Calculate(new Triangle(10, 5, 11.18));
-            double area3 = calculator.Calculate(new Circle(10));
-
-            //Assert
-            Assert.Equal(1.96, area);
-            Assert.Equal(25, area2);
-            Assert.Equal(314.16, area3);
-
+            double area = calculator.Calculate(new Triangle(side1,side2,side3));
+            Assert.Equal(expected, area);
         }
-        [Fact]
-        public void CalculateAreaShouldThrowArgumentException()
+        [Theory]
+        [InlineData(10,314.16)]
+        public void CircleCalculateAreaShouldReturnExpectedValue(double radius,double expected)
         {
             IAreaCalculator calculator = new AreaCalculator();
- 
-            //Assert
-            Assert.Throws<ArgumentException>(() =>calculator.Calculate(new Triangle(2, 2, 4)));
+            double area = calculator.Calculate(new Circle(radius));
+            Assert.Equal(expected, area);
         }
+        
     }
 }

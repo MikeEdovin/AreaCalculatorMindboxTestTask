@@ -1,39 +1,33 @@
 using AreaCalculatorProject.Shapes;
 using System.Reflection;
+using System.Runtime.CompilerServices;
+using Xunit.Abstractions;
 
 namespace AreaCalculatorTests
 {
     public class TriangleTests
     {
-        [Fact]
-        public void IsExistShouldReturnExpectedValue()
+        [Theory]
+        [InlineData(10, 5, 11.18, true)]
+        [InlineData(2, 2, 4, false)]
+        public void ValidateTriangleShouldReturnExpectedValue(double side1, double side2, double side3, bool expected)
         {
-            Shape rectangularTriangle = new Triangle(10, 5, 11.18);
-            Shape wrongTriangle = new Triangle(2, 2, 4);
-            MethodInfo isExistMethodInfo = typeof(Triangle).GetMethod("IsExist", BindingFlags.Instance | BindingFlags.NonPublic);
-            object[] args = {};
-
-            //Assert
-            Assert.Equal(true, isExistMethodInfo.Invoke(rectangularTriangle, args));
-            Assert.Equal(false, isExistMethodInfo.Invoke(wrongTriangle,args));
+            var result = Triangle.ValidateTriangle(side1, side2, side3);
+            Assert.Equal(expected, result);
         }
-        public void IsRectangularShouldReturnExpectedValue()
+
+        [Theory]
+        [InlineData(10, 5, 11.18, true)]
+        [InlineData(2.2, 2, 2.2, false)]
+        public void IsRectangularShouldReturnExpectedValue(double side1, double side2, double side3, bool expected)
         {
-            Shape rectangularTriangle = new Triangle(10, 5, 11.18);
-            Shape notRectangularTriangle = new Triangle(2.2, 2.2, 2);
-
-            MethodInfo isRectangularMethodInfo = typeof(Triangle).GetMethod("IsRectangular", BindingFlags.Instance | BindingFlags.NonPublic);
-            object[] args = { };
-
-            //Assert
-            Assert.Equal(true, isRectangularMethodInfo.Invoke(rectangularTriangle, args));
-            Assert.Equal(true, isRectangularMethodInfo.Invoke(notRectangularTriangle, args));
+            var result = new Triangle(side1, side2, side3).IsRectangular();
+            Assert.Equal(expected,result);
         }
         [Fact]
-        public void CalulateAreaShouldThrowArgumentException()
+        public void TriangleConstructorShoudThrowArgumentException()
         {
-            Shape wrongTriangle = new Triangle(2, 2, 4);
-            Assert.Throws<ArgumentException>(() => wrongTriangle.CalculateArea());
+            Assert.Throws<ArgumentException>(() => new Triangle(2, 2, 4));
         }
 
     }
