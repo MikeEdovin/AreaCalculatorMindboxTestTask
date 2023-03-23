@@ -4,30 +4,30 @@ using AreaCalculatorProject;
 using AreaCalculatorProject.Shapes;
 
 namespace AreaCalculatorTests
-{/*
+{
     public class AreaCalculatorTests
     {
         [Theory]
-        [InlineData(2.2, 2.2, 2,1.96)]
-        [InlineData(10, 5, 11.18,25)]
-        public void TriangleCalculateAreaShouldReturnExpectedValue(double side1, double side2, double side3, double expected)
+        [InlineData("{\"Type\":\"Circle\",\"Args\":\"{\\\"Radius\\\":10.0}\"}", 314.16)]
+        [InlineData("{\"Type\":\"Triangle\",\"Args\":\"{\\\"Side1\\\":2.2,\\\"Side2\\\":2.2,\\\"Side3\\\":2}\"}", 1.96)]
+        [InlineData("{\"Type\":\"Triangle\",\"Args\":\"{\\\"Side1\\\":10,\\\"Side2\\\":5,\\\"Side3\\\":11.18}\"}", 25)]
+        public void CalculateAreaShouldReturnExpectedValue(string shapeString, double expected)
         {
             IAreaCalculator calculator= new AreaCalculator();
-            double[] parameters = new double[]{ side1, side2, side3 };
-           
-            double area = calculator.Calculate("Triangle",parameters);
+            double area = calculator.Calculate(shapeString);
             Assert.Equal(expected, area);
         }
+
         [Theory]
-        [InlineData(10,314.16)]
-        public void CircleCalculateAreaShouldReturnExpectedValue(double radius,double expected)
+        [InlineData("")]
+        [InlineData(null)]
+        [InlineData("{\"Type\":\"Circle\",\"Args\":\"{\"Radius\":10.0}\"}")]
+        [InlineData("{\"Type\":\"Triangle\",\"Args\":\"{\\\"Side1\\\":2.2,\\\"Side2\\\":2.2,\\\"Side3\\\":4}\"}")]
+        public void CalculateAreaShouldThrowException(string shapeString)
         {
-            IAreaCalculator calculator = new AreaCalculator();
-            double[] parameters = new double[] {radius };
-            double area = calculator.Calculate("Circle",parameters);
-            Assert.Equal(expected, area);
+            IAreaCalculator calculator= new AreaCalculator();
+            Assert.Throws<ArgumentException>(()=>calculator.Calculate(shapeString));
         }
-        
     }
-    */
+    
 }

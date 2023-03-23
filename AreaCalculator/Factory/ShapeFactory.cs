@@ -27,7 +27,7 @@ namespace AreaCalculatorProject.Factory
                     case ("Triangle"):
                         return JsonSerializer.Deserialize<Triangle>(args);
                     default:
-                        throw new ArgumentException("Invalid input.");
+                        throw new ArgumentException("Invalid input. Input can't be empty. ");
                 }
             }
             catch (ArgumentNullException e)

@@ -12,7 +12,7 @@ namespace AreaCalculatorTests
         [InlineData(2, 2, 4, false)]
         public void ValidateTriangleShouldReturnExpectedValue(double side1, double side2, double side3, bool expected)
         {
-            var result = Triangle.ValidateTriangle(side1, side2, side3);
+            var result = Triangle.ValidatedTriangle(side1, side2, side3);
             Assert.Equal(expected, result);
         }
 
@@ -21,13 +21,14 @@ namespace AreaCalculatorTests
         [InlineData(2.2, 2, 2.2, false)]
         public void IsRectangularShouldReturnExpectedValue(double side1, double side2, double side3, bool expected)
         {
-            var result = new Triangle(side1, side2, side3).IsRectangular();
+            var result = new Triangle() { Side1=side1,Side2=side2,Side3=side3}.IsRectangular();
             Assert.Equal(expected,result);
         }
-        [Fact]
-        public void TriangleConstructorShoudThrowArgumentException()
+        [Theory]
+        [InlineData(2,2,4)]
+        public void TriangleConstructorShoudThrowArgumentException(double side1, double side2, double side3)
         {
-            Assert.Throws<ArgumentException>(() => new Triangle(2, 2, 4));
+            Assert.Throws<ArgumentException>(() => new Triangle() { Side1=side1, Side2=side2,Side3=side3});
         }
 
     }
