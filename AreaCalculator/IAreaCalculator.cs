@@ -1,4 +1,6 @@
 ﻿using AreaCalculatorProject.Shapes;
+using AreaCalculatorProject.Shapes;
+
 
 namespace AreaCalculatorProject
 {
@@ -10,6 +12,6 @@ namespace AreaCalculatorProject
     /// </summary>
     public interface IAreaCalculator
     {
-        double Calculate(Shape shape);
+        double Calculate(string shapeString);
     }
 }

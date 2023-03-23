@@ -1,4 +1,6 @@
-﻿using AreaCalculatorProject;
+﻿using AreaCalculatorProject.Factory;
+using AreaCalculatorProject.Shapes;
+using AreaCalculatorProject;
 using AreaCalculatorProject.Shapes;
 
 namespace AreaCalculatorTests
@@ -11,7 +13,9 @@ namespace AreaCalculatorTests
         public void TriangleCalculateAreaShouldReturnExpectedValue(double side1, double side2, double side3, double expected)
         {
             IAreaCalculator calculator= new AreaCalculator();
-            double area = calculator.Calculate(new Triangle(side1,side2,side3));
+            double[] parameters = new double[]{ side1, side2, side3 };
+           
+            double area = calculator.Calculate("Triangle",parameters);
             Assert.Equal(expected, area);
         }
         [Theory]
@@ -19,7 +23,8 @@ namespace AreaCalculatorTests
         public void CircleCalculateAreaShouldReturnExpectedValue(double radius,double expected)
         {
             IAreaCalculator calculator = new AreaCalculator();
-            double area = calculator.Calculate(new Circle(radius));
+            double[] parameters = new double[] {radius };
+            double area = calculator.Calculate("Circle",parameters);
             Assert.Equal(expected, area);
         }
         

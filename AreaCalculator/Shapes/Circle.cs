@@ -1,6 +1,6 @@
 ﻿namespace AreaCalculatorProject.Shapes
 {
-    internal class Circle:Shape
+    public class Circle:Shape
     {
         private readonly double radius;    
         public Circle(double radius) { this.radius= radius; }
