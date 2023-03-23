@@ -2,12 +2,12 @@
 {
     public class Circle:Shape
     {
-        private readonly double radius;    
-        public Circle(double radius) { this.radius= radius; }
+       public double Radius { get; set; }    
+        public Circle(double radius) { Radius= radius; }
 
         public override double CalculateArea()
         {
-            return Math.Round(Math.PI*radius*radius,2);
+            return Math.Round(Math.PI*Radius*Radius,2);
            
         }
     }

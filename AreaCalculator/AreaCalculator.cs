@@ -9,7 +9,7 @@ namespace AreaCalculatorProject
         
         public double Calculate(string shapeString)
         {
-            Shape shape= ShapeFactory.CreateShapeFromJson(shapeString);
+            Shape? shape= ShapeFactory.CreateShapeFromJson(shapeString);
             return shape.CalculateArea();
         }
     }

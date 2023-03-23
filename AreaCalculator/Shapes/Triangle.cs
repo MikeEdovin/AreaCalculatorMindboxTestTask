@@ -2,11 +2,17 @@
 {
     public class Triangle : Shape
     {
-        private readonly List<double> sides;
+        private List<double> sides;
+        public double Side1 { get; set; }
+        public double Side2 { get; set; }
+        public double Side3 { get; set; }
 
         public Triangle(double side1,double side2,double side3 )
         {if (ValidateTriangle(side1,side2,side3))
             {
+                Side1= side1;
+                Side2= side2;
+                Side3= side3;
                 sides = new List<double>() { side1,side2,side3 };   
                 sides.Sort();
             }
