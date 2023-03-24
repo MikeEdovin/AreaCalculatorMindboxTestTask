@@ -47,12 +47,19 @@ namespace AreaCalculatorProject.Shapes
 
         internal static string GetExceptionMessage(List<double> args)
         {
-            string message = "Invalid input. There is no triangle with such a set of side sizes ";
-            foreach (double item in args)
+            string message = "";
+            if (args.Count == 0)
             {
-                message += item + " ";
+                message = "Invalid input. You didn't pass any arguments.";
             }
-            message += ".";
+            else {
+                message = "Invalid input. There is no triangle with such a set of side sizes ";
+                foreach (double item in args)
+                {
+                    message += item + " ";
+                }
+                message += ".";
+            }
             return message;
         }
         internal bool IsRectangular()

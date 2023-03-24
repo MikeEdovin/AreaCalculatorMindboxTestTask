@@ -10,6 +10,7 @@ namespace AreaCalculatorProject.Tests
             yield return new object[] { new List<double>() { 2, 2, 4 }, false };
             yield return new object[] { new List<double>() { 1, 1 }, false };
             yield return new object[] { new List<double>() { -1, 1, 4 }, false };
+            yield return new object[] { new List<double>() { }, false };
         }
 
         [Theory]
@@ -38,6 +39,7 @@ namespace AreaCalculatorProject.Tests
             yield return new object[] { new List<double>() { 2, 2, 4 } };
             yield return new object[] { new List<double>() { 1, 1 } };
             yield return new object[] { new List<double>() { -1, 1, 4 } };
+            yield return new object[] { new List<double>() { } };
         }
         [Theory]
         [MemberData(nameof(TriangleExceptionData))]

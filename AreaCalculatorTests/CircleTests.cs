@@ -9,6 +9,7 @@ namespace AreaCalculatorProject.Tests
             yield return new object[] { new List<double>() { 10 }, true };
             yield return new object[] { new List<double>() { -2 }, false };
             yield return new object[] { new List<double>() { 1, 1 }, false };
+            yield return new object[] { new List<double>() { }, false };
         }
 
         [Theory]
@@ -22,6 +23,7 @@ namespace AreaCalculatorProject.Tests
         {
             yield return new object[] { new List<double>() { 2, 2 } };
             yield return new object[] { new List<double>() { -1 } };
+            yield return new object[] { new List<double>() { } };
         }
         [Theory]
         [MemberData(nameof(CircleExceptionData))]
