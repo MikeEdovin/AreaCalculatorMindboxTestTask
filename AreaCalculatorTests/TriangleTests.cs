@@ -1,6 +1,6 @@
 using AreaCalculatorProject.Shapes;
 
-namespace AreaCalculatorTests
+namespace AreaCalculatorProject.Tests
 {
     public class TriangleTests
     {
