@@ -1,44 +1,25 @@
-﻿namespace AreaCalculatorProject.Shapes
+﻿using System.Text;
+
+namespace AreaCalculatorProject.Shapes
 {
     public class Triangle : Shape
     {
         private List<double> sides;
-        public double Side1 { get; set; }
-        public double Side2 { get; set; }
-        public double Side3 { get; set; }
-
-        public Triangle()
+        public Triangle(List<double>args)
         {
-            if (ValidatedTriangle(Side1, Side2, Side3))
+            if (ValidateArgs(args))
             {
-                sides = new List<double>() { Side1,Side2,Side3 };
+                sides = args;
                 sides.Sort();
             }
             else
             {
-                throw new ArgumentException("Invalid input. There is no triangle with such a set of side sizes ");
-            }
-        }
-
-        public Triangle(double side1, double side2, double side3)
-        {
-            if (ValidatedTriangle(side1, side2, side3))
-            {
-                Side1 = side1;
-                Side2 = side2;
-                Side3 = side3;
-                sides = new List<double>() { side1, side2, side3 };
-                sides.Sort();
-            }
-            else
-            {
-                throw new ArgumentException("Invalid input. There is no triangle with such a set of side sizes ");
+                throw new ArgumentException(GetExceptionMessage(args));
             }
         }
 
         public override double CalculateArea()
         {
-
             if (IsRectangular())
             {
                 return Math.Round((sides[0] * sides[1]) / 2, 2);
@@ -52,21 +33,32 @@
             }
         }
 
-    
-
-        
-    
-
-        internal static bool ValidatedTriangle(double side1, double side2, double side3)
+        internal static bool ValidateArgs(List<double>args)
         {
-            return side1 +side2 > side3 
-                && side1 + side3 > side2 
-                && side2 + side3 > side1;
+            if (args.Count != 3) return false;
+            foreach(double item in args)
+            {
+                if(item<=0) return false;
+            }
+            return args[0] + args[1] > args[2] 
+                && args[0] + args[2] > args[1] 
+                && args[1] + args[2] > args[0];
         }
 
+        internal static string GetExceptionMessage(List<double> args)
+        {
+            string message = "Invalid input. There is no triangle with such a set of side sizes ";
+            foreach (double item in args)
+            {
+                message += item + " ";
+            }
+            message += ".";
+            return message;
+        }
         internal bool IsRectangular()
         {
             return Math.Round(sides[2] * sides[2], 1) == Math.Round(sides[0] * sides[0] + sides[1] * sides[1],1) ;
         }
+
     }
 }

@@ -1,16 +1,15 @@
-﻿using AreaCalculatorProject.Shapes;
-using AreaCalculatorProject.Factory;
+﻿using AreaCalculatorProject.Factory;
+using AreaCalculatorProject.MappingObjects;
 using AreaCalculatorProject.Shapes;
 
 namespace AreaCalculatorProject
 {
     public class AreaCalculator : IAreaCalculator
     {
-        
-        public double Calculate(string shapeString)
+        public Output Calculate(Input input)
         {
-            Shape? shape= ShapeFactory.CreateShapeFromJson(shapeString);
-            return shape.CalculateArea();
+            Shape shape= ShapeFactory.CreateShape(input);
+            return new Output() { Area = shape.CalculateArea() };
         }
     }
 }

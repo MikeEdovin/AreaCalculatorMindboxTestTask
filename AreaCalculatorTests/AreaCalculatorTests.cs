@@ -1,32 +1,24 @@
-﻿using AreaCalculatorProject.Factory;
-using AreaCalculatorProject.Shapes;
-using AreaCalculatorProject;
+﻿using AreaCalculatorProject;
+using AreaCalculatorProject.MappingObjects;
 using AreaCalculatorProject.Shapes;
 
 namespace AreaCalculatorTests
 {
     public class AreaCalculatorTests
     {
-        [Theory]
-        [InlineData("{\"Type\":\"Circle\",\"Args\":\"{\\\"Radius\\\":10.0}\"}", 314.16)]
-        [InlineData("{\"Type\":\"Triangle\",\"Args\":\"{\\\"Side1\\\":2.2,\\\"Side2\\\":2.2,\\\"Side3\\\":2}\"}", 1.96)]
-        [InlineData("{\"Type\":\"Triangle\",\"Args\":\"{\\\"Side1\\\":10,\\\"Side2\\\":5,\\\"Side3\\\":11.18}\"}", 25)]
-        public void CalculateAreaShouldReturnExpectedValue(string shapeString, double expected)
+        public static IEnumerable<object[]> CalculateData()
         {
-            IAreaCalculator calculator= new AreaCalculator();
-            double area = calculator.Calculate(shapeString);
-            Assert.Equal(expected, area);
+            yield return new object[] { new Input() { Type = ShapesEnum.Circle, Args = new List<double>() { 10 } }, 314.16 };
+            yield return new object[] { new Input() { Type = ShapesEnum.Triangle, Args = new List<double>() { 10,5,11.18 } }, 25 };
         }
 
         [Theory]
-        [InlineData("")]
-        [InlineData(null)]
-        [InlineData("{\"Type\":\"Circle\",\"Args\":\"{\"Radius\":10.0}\"}")]
-        [InlineData("{\"Type\":\"Triangle\",\"Args\":\"{\\\"Side1\\\":2.2,\\\"Side2\\\":2.2,\\\"Side3\\\":4}\"}")]
-        public void CalculateAreaShouldThrowException(string shapeString)
+        [MemberData(nameof(CalculateData))]
+        public void CalculateShouldReturnExpectedValue(Input input, double expected)
         {
             IAreaCalculator calculator= new AreaCalculator();
-            Assert.Throws<ArgumentException>(()=>calculator.Calculate(shapeString));
+            Output output = calculator.Calculate(input);
+            Assert.Equal(expected, output.Area);
         }
     }
     
