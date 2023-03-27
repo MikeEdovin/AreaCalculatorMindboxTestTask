@@ -13,5 +13,6 @@
 
     Проверку на то, является ли треугольник прямоугольным
 
-Точка входа - ICalculatorArea.Calculate(Shape shape)
+Input - object Input(ShapesEnum Type, List<double>args)
+Output  - object Output(double Area)
 
